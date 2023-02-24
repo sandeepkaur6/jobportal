@@ -1,0 +1,477 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="jobportalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="Companyid" />
+          </Key>
+          <Property Name="Companyid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Companyname" Type="varchar" MaxLength="30" />
+          <Property Name="email" Type="varchar" MaxLength="30" />
+          <Property Name="Username" Type="varchar" MaxLength="30" />
+          <Property Name="Password" Type="varchar" MaxLength="30" />
+          <Property Name="City" Type="varchar" MaxLength="30" />
+          <Property Name="phnumber" Type="varchar" MaxLength="30" />
+          <Property Name="IndustryType" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="experience">
+          <Key>
+            <PropertyRef Name="expiid" />
+          </Key>
+          <Property Name="expiid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="resumekey" Type="int" />
+          <Property Name="companyname" Type="varchar" MaxLength="30" />
+          <Property Name="doj" Type="date" />
+          <Property Name="yoe" Type="int" />
+          <Property Name="jobtitle" Type="varchar" MaxLength="30" />
+          <Property Name="responsibilities" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="jobsubmission">
+          <Key>
+            <PropertyRef Name="submissionid" />
+          </Key>
+          <Property Name="submissionid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="resumekey" Type="int" />
+          <Property Name="reqid" Type="int" />
+          <Property Name="selected" Type="bit" />
+          <Property Name="score" Type="int" />
+          <Property Name="assessmentstatus" Type="bit" />
+          <Property Name="appliedon" Type="date" />
+        </EntityType>
+        <EntityType Name="qualification">
+          <Key>
+            <PropertyRef Name="qid" />
+          </Key>
+          <Property Name="qid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="resumekey" Type="int" />
+          <Property Name="Qualification" Type="varchar" MaxLength="100" />
+          <Property Name="institutename" Type="varchar" MaxLength="100" />
+          <Property Name="YOC" Type="date" />
+        </EntityType>
+        <EntityType Name="register">
+          <Key>
+            <PropertyRef Name="resumekey" />
+          </Key>
+          <Property Name="resumekey" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="firstname" Type="varchar" MaxLength="30" />
+          <Property Name="lastname" Type="varchar" MaxLength="30" />
+          <Property Name="username" Type="varchar" MaxLength="30" />
+          <Property Name="password" Type="varchar" MaxLength="30" />
+          <Property Name="email" Type="varchar" MaxLength="50" />
+          <Property Name="dob" Type="date" />
+          <Property Name="phonenumber" Type="int" />
+          <Property Name="gender" Type="bit" />
+          <Property Name="Nationality" Type="varchar" MaxLength="30" />
+          <Property Name="resumepath" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="req">
+          <Key>
+            <PropertyRef Name="reqid" />
+          </Key>
+          <Property Name="reqid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="companyid" Type="int" />
+          <Property Name="jobtitle" Type="varchar" MaxLength="80" />
+          <Property Name="description" Type="varchar" MaxLength="250" />
+          <Property Name="department" Type="varchar" MaxLength="50" />
+          <Property Name="location" Type="varchar" MaxLength="50" />
+          <Property Name="dateopen" Type="date" />
+          <Property Name="Experience" Type="int" />
+          <Property Name="Salary" Type="int" />
+          <Property Name="NOP" Type="int" />
+          <Property Name="doe" Type="date" />
+          <Property Name="status" Type="int" />
+          <Property Name="approvalstatus" Type="int" />
+        </EntityType>
+        <Association Name="FK__experienc__resum__36B12243">
+          <End Role="register" Type="Self.register" Multiplicity="0..1" />
+          <End Role="experience" Type="Self.experience" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="register">
+              <PropertyRef Name="resumekey" />
+            </Principal>
+            <Dependent Role="experience">
+              <PropertyRef Name="resumekey" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__jobsubmis__reqid__30F848ED">
+          <End Role="req" Type="Self.req" Multiplicity="0..1" />
+          <End Role="jobsubmission" Type="Self.jobsubmission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="req">
+              <PropertyRef Name="reqid" />
+            </Principal>
+            <Dependent Role="jobsubmission">
+              <PropertyRef Name="reqid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__jobsubmis__resum__300424B4">
+          <End Role="register" Type="Self.register" Multiplicity="0..1" />
+          <End Role="jobsubmission" Type="Self.jobsubmission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="register">
+              <PropertyRef Name="resumekey" />
+            </Principal>
+            <Dependent Role="jobsubmission">
+              <PropertyRef Name="resumekey" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__qualifica__resum__33D4B598">
+          <End Role="register" Type="Self.register" Multiplicity="0..1" />
+          <End Role="qualification" Type="Self.qualification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="register">
+              <PropertyRef Name="resumekey" />
+            </Principal>
+            <Dependent Role="qualification">
+              <PropertyRef Name="resumekey" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__req__companyid__2D27B809">
+          <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
+          <End Role="req" Type="Self.req" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="Companyid" />
+            </Principal>
+            <Dependent Role="req">
+              <PropertyRef Name="companyid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="jobportalModelStoreContainer">
+          <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="experience" EntityType="Self.experience" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="jobsubmission" EntityType="Self.jobsubmission" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="qualification" EntityType="Self.qualification" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="register" EntityType="Self.register" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="req" EntityType="Self.req" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__experienc__resum__36B12243" Association="Self.FK__experienc__resum__36B12243">
+            <End Role="register" EntitySet="register" />
+            <End Role="experience" EntitySet="experience" />
+          </AssociationSet>
+          <AssociationSet Name="FK__jobsubmis__reqid__30F848ED" Association="Self.FK__jobsubmis__reqid__30F848ED">
+            <End Role="req" EntitySet="req" />
+            <End Role="jobsubmission" EntitySet="jobsubmission" />
+          </AssociationSet>
+          <AssociationSet Name="FK__jobsubmis__resum__300424B4" Association="Self.FK__jobsubmis__resum__300424B4">
+            <End Role="register" EntitySet="register" />
+            <End Role="jobsubmission" EntitySet="jobsubmission" />
+          </AssociationSet>
+          <AssociationSet Name="FK__qualifica__resum__33D4B598" Association="Self.FK__qualifica__resum__33D4B598">
+            <End Role="register" EntitySet="register" />
+            <End Role="qualification" EntitySet="qualification" />
+          </AssociationSet>
+          <AssociationSet Name="FK__req__companyid__2D27B809" Association="Self.FK__req__companyid__2D27B809">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="req" EntitySet="req" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="jobportalModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="Companyid" />
+          </Key>
+          <Property Name="Companyid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Companyname" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Username" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="phnumber" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="IndustryType" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="reqs" Relationship="Self.FK__req__companyid__2D27B809" FromRole="Company" ToRole="req" />
+        </EntityType>
+        <EntityType Name="experience">
+          <Key>
+            <PropertyRef Name="expiid" />
+          </Key>
+          <Property Name="expiid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="resumekey" Type="Int32" />
+          <Property Name="companyname" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="doj" Type="DateTime" Precision="0" />
+          <Property Name="yoe" Type="Int32" />
+          <Property Name="jobtitle" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="responsibilities" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="register" Relationship="Self.FK__experienc__resum__36B12243" FromRole="experience" ToRole="register" />
+        </EntityType>
+        <EntityType Name="jobsubmission">
+          <Key>
+            <PropertyRef Name="submissionid" />
+          </Key>
+          <Property Name="submissionid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="resumekey" Type="Int32" />
+          <Property Name="reqid" Type="Int32" />
+          <Property Name="selected" Type="Boolean" />
+          <Property Name="score" Type="Int32" />
+          <Property Name="assessmentstatus" Type="Boolean" />
+          <Property Name="appliedon" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="req" Relationship="Self.FK__jobsubmis__reqid__30F848ED" FromRole="jobsubmission" ToRole="req" />
+          <NavigationProperty Name="register" Relationship="Self.FK__jobsubmis__resum__300424B4" FromRole="jobsubmission" ToRole="register" />
+        </EntityType>
+        <EntityType Name="qualification">
+          <Key>
+            <PropertyRef Name="qid" />
+          </Key>
+          <Property Name="qid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="resumekey" Type="Int32" />
+          <Property Name="Qualification1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="institutename" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="YOC" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="register" Relationship="Self.FK__qualifica__resum__33D4B598" FromRole="qualification" ToRole="register" />
+        </EntityType>
+        <EntityType Name="register">
+          <Key>
+            <PropertyRef Name="resumekey" />
+          </Key>
+          <Property Name="resumekey" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="firstname" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="lastname" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="username" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="dob" Type="DateTime" Precision="0" />
+          <Property Name="phonenumber" Type="Int32" />
+          <Property Name="gender" Type="Boolean" />
+          <Property Name="Nationality" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="resumepath" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="experiences" Relationship="Self.FK__experienc__resum__36B12243" FromRole="register" ToRole="experience" />
+          <NavigationProperty Name="jobsubmissions" Relationship="Self.FK__jobsubmis__resum__300424B4" FromRole="register" ToRole="jobsubmission" />
+          <NavigationProperty Name="qualifications" Relationship="Self.FK__qualifica__resum__33D4B598" FromRole="register" ToRole="qualification" />
+        </EntityType>
+        <EntityType Name="req">
+          <Key>
+            <PropertyRef Name="reqid" />
+          </Key>
+          <Property Name="reqid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="companyid" Type="Int32" />
+          <Property Name="jobtitle" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Name="description" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="department" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="location" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="dateopen" Type="DateTime" Precision="0" />
+          <Property Name="Experience" Type="Int32" />
+          <Property Name="Salary" Type="Int32" />
+          <Property Name="NOP" Type="Int32" />
+          <Property Name="doe" Type="DateTime" Precision="0" />
+          <Property Name="status" Type="Int32" />
+          <Property Name="approvalstatus" Type="Int32" />
+          <NavigationProperty Name="Company" Relationship="Self.FK__req__companyid__2D27B809" FromRole="req" ToRole="Company" />
+          <NavigationProperty Name="jobsubmissions" Relationship="Self.FK__jobsubmis__reqid__30F848ED" FromRole="req" ToRole="jobsubmission" />
+        </EntityType>
+        <Association Name="FK__req__companyid__2D27B809">
+          <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
+          <End Role="req" Type="Self.req" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="Companyid" />
+            </Principal>
+            <Dependent Role="req">
+              <PropertyRef Name="companyid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__experienc__resum__36B12243">
+          <End Role="register" Type="Self.register" Multiplicity="0..1" />
+          <End Role="experience" Type="Self.experience" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="register">
+              <PropertyRef Name="resumekey" />
+            </Principal>
+            <Dependent Role="experience">
+              <PropertyRef Name="resumekey" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__jobsubmis__reqid__30F848ED">
+          <End Role="req" Type="Self.req" Multiplicity="0..1" />
+          <End Role="jobsubmission" Type="Self.jobsubmission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="req">
+              <PropertyRef Name="reqid" />
+            </Principal>
+            <Dependent Role="jobsubmission">
+              <PropertyRef Name="reqid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__jobsubmis__resum__300424B4">
+          <End Role="register" Type="Self.register" Multiplicity="0..1" />
+          <End Role="jobsubmission" Type="Self.jobsubmission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="register">
+              <PropertyRef Name="resumekey" />
+            </Principal>
+            <Dependent Role="jobsubmission">
+              <PropertyRef Name="resumekey" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__qualifica__resum__33D4B598">
+          <End Role="register" Type="Self.register" Multiplicity="0..1" />
+          <End Role="qualification" Type="Self.qualification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="register">
+              <PropertyRef Name="resumekey" />
+            </Principal>
+            <Dependent Role="qualification">
+              <PropertyRef Name="resumekey" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="jobportalEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Companies" EntityType="Self.Company" />
+          <EntitySet Name="experiences" EntityType="Self.experience" />
+          <EntitySet Name="jobsubmissions" EntityType="Self.jobsubmission" />
+          <EntitySet Name="qualifications" EntityType="Self.qualification" />
+          <EntitySet Name="registers" EntityType="Self.register" />
+          <EntitySet Name="reqs" EntityType="Self.req" />
+          <AssociationSet Name="FK__req__companyid__2D27B809" Association="Self.FK__req__companyid__2D27B809">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="req" EntitySet="reqs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__experienc__resum__36B12243" Association="Self.FK__experienc__resum__36B12243">
+            <End Role="register" EntitySet="registers" />
+            <End Role="experience" EntitySet="experiences" />
+          </AssociationSet>
+          <AssociationSet Name="FK__jobsubmis__reqid__30F848ED" Association="Self.FK__jobsubmis__reqid__30F848ED">
+            <End Role="req" EntitySet="reqs" />
+            <End Role="jobsubmission" EntitySet="jobsubmissions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__jobsubmis__resum__300424B4" Association="Self.FK__jobsubmis__resum__300424B4">
+            <End Role="register" EntitySet="registers" />
+            <End Role="jobsubmission" EntitySet="jobsubmissions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__qualifica__resum__33D4B598" Association="Self.FK__qualifica__resum__33D4B598">
+            <End Role="register" EntitySet="registers" />
+            <End Role="qualification" EntitySet="qualifications" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="jobportalModelStoreContainer" CdmEntityContainer="jobportalEntities1">
+          <EntitySetMapping Name="Companies">
+            <EntityTypeMapping TypeName="jobportalModel.Company">
+              <MappingFragment StoreEntitySet="Company">
+                <ScalarProperty Name="Companyid" ColumnName="Companyid" />
+                <ScalarProperty Name="Companyname" ColumnName="Companyname" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="phnumber" ColumnName="phnumber" />
+                <ScalarProperty Name="IndustryType" ColumnName="IndustryType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="experiences">
+            <EntityTypeMapping TypeName="jobportalModel.experience">
+              <MappingFragment StoreEntitySet="experience">
+                <ScalarProperty Name="expiid" ColumnName="expiid" />
+                <ScalarProperty Name="resumekey" ColumnName="resumekey" />
+                <ScalarProperty Name="companyname" ColumnName="companyname" />
+                <ScalarProperty Name="doj" ColumnName="doj" />
+                <ScalarProperty Name="yoe" ColumnName="yoe" />
+                <ScalarProperty Name="jobtitle" ColumnName="jobtitle" />
+                <ScalarProperty Name="responsibilities" ColumnName="responsibilities" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="jobsubmissions">
+            <EntityTypeMapping TypeName="jobportalModel.jobsubmission">
+              <MappingFragment StoreEntitySet="jobsubmission">
+                <ScalarProperty Name="submissionid" ColumnName="submissionid" />
+                <ScalarProperty Name="resumekey" ColumnName="resumekey" />
+                <ScalarProperty Name="reqid" ColumnName="reqid" />
+                <ScalarProperty Name="selected" ColumnName="selected" />
+                <ScalarProperty Name="score" ColumnName="score" />
+                <ScalarProperty Name="assessmentstatus" ColumnName="assessmentstatus" />
+                <ScalarProperty Name="appliedon" ColumnName="appliedon" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="qualifications">
+            <EntityTypeMapping TypeName="jobportalModel.qualification">
+              <MappingFragment StoreEntitySet="qualification">
+                <ScalarProperty Name="qid" ColumnName="qid" />
+                <ScalarProperty Name="resumekey" ColumnName="resumekey" />
+                <ScalarProperty Name="Qualification1" ColumnName="Qualification" />
+                <ScalarProperty Name="institutename" ColumnName="institutename" />
+                <ScalarProperty Name="YOC" ColumnName="YOC" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="registers">
+            <EntityTypeMapping TypeName="jobportalModel.register">
+              <MappingFragment StoreEntitySet="register">
+                <ScalarProperty Name="resumekey" ColumnName="resumekey" />
+                <ScalarProperty Name="firstname" ColumnName="firstname" />
+                <ScalarProperty Name="lastname" ColumnName="lastname" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="dob" ColumnName="dob" />
+                <ScalarProperty Name="phonenumber" ColumnName="phonenumber" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="Nationality" ColumnName="Nationality" />
+                <ScalarProperty Name="resumepath" ColumnName="resumepath" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="reqs">
+            <EntityTypeMapping TypeName="jobportalModel.req">
+              <MappingFragment StoreEntitySet="req">
+                <ScalarProperty Name="reqid" ColumnName="reqid" />
+                <ScalarProperty Name="companyid" ColumnName="companyid" />
+                <ScalarProperty Name="jobtitle" ColumnName="jobtitle" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="department" ColumnName="department" />
+                <ScalarProperty Name="location" ColumnName="location" />
+                <ScalarProperty Name="dateopen" ColumnName="dateopen" />
+                <ScalarProperty Name="Experience" ColumnName="Experience" />
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
+                <ScalarProperty Name="NOP" ColumnName="NOP" />
+                <ScalarProperty Name="doe" ColumnName="doe" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="approvalstatus" ColumnName="approvalstatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
