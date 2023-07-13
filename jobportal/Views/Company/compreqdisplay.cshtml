@@ -1,0 +1,113 @@
+﻿@model List<jobportal.Models.req>
+@{
+    ViewBag.Title = "compreqdisplay";
+    Layout = "~/Views/Shared/companyMaster.cshtml";
+    WebGrid webGrid = new WebGrid(source: Model, canPage: false, canSort: false, rowsPerPage: 10);
+}
+
+<style type="text/css">
+    .webgrid-table {
+        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+        font-size: 10pt;
+        width: 100%;
+        border-collapse: separate;
+        border: solid 1px darkturquoise;
+        background-color: white;
+    }
+
+        .webgrid-table td, th {
+            border: 1px solid darkturquoise;
+            padding: 3px 7px 2px;
+        }
+
+    .webgrid-header {
+        background-color: dimgrey;
+        text-decoration: none;
+        color: white;
+        padding-bottom: 4px;
+        padding-top: 5px;
+        text-align: left;
+    }
+
+    .webgrid-footer {
+    }
+
+    .webgrid-row-style {
+        padding: 3px 7px 2px;
+    }
+</style>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $('#WebGrid > tbody > tr').each(function (index) {
+
+            if ($(this).children('td:nth-child(12)').text() == "1") {
+                $(this).children('td:nth-child(12)').css("color", "red");
+                $(this).children('td:nth-child(12)').html("Open");
+            } else if ($(this).children('td:nth-child(12)').text() == "2") {
+                $(this).children('td:nth-child(12)').css("color", "green");
+                $(this).children('td:nth-child(12)').html("Cancel");
+            }
+            else {
+                $(this).children('td:nth-child(12)').css("color", "green");
+                $(this).children('td:nth-child(12)').html("No Staus/Expired");
+            }
+
+            if ($(this).children('td:nth-child(13)').text() == "0") {
+                $(this).children('td:nth-child(13)').css("color", "red");
+                $(this).children('td:nth-child(13)').html("Rejected");
+            } else if ($(this).children('td:nth-child(13)').text() == "1") {
+                $(this).children('td:nth-child(13)').css("color", "green");
+                $(this).children('td:nth-child(13)').html("Approved");
+            }
+            else {
+                $(this).children('td:nth-child(13)').css("color", "yellow");
+                $(this).children('td:nth-child(13)').html("Pending");
+            }
+        });
+    });
+
+    function alertmsg(id) {
+        let res = confirm("Are you sure you want to delete Job requirement with Requirement ID? " + id);
+
+        if (res) {
+
+            window.location.href = "/Company/deletereq/?id=" + id;
+        }
+    }
+    function src(id) {
+        window.location.href = "/Company/viewselectedcand/?s=" + id;
+    }
+</script>
+
+
+<h2 class="text-center" style="color:grey">Requirement Data</h2>
+
+<div id="d1" style="max-width:90%;overflow-x:auto;margin:60px">
+
+    @webGrid.GetHtml(
+           htmlAttributes: new { @id = "WebGrid", @class = "table table-bordered", @style = "font-size:small" },
+           tableStyle: "webgrid-table",
+    headerStyle: "webgrid-header",
+    footerStyle: "webgrid-footer",
+    alternatingRowStyle: "webgrid-alternating-row",
+    rowStyle: "webgrid-row-style",
+           columns: webGrid.Columns(
+     webGrid.Column("reqid", "Requirement ID", format: (item) => Html.Raw("<a onclick='src(" + item.reqid + ")'>" + item.reqid + "</a>")),
+webGrid.Column("companyid", "Company Id"),
+webGrid.Column("jobtitle", "Job Title"),
+webGrid.Column("description", "Job Description"),
+webGrid.Column("department", "Job Department"),
+webGrid.Column("location", "Job Location"),
+webGrid.Column("dateopen", "Application Open Date"),
+webGrid.Column("Experience", "Minimum Experience"),
+webGrid.Column("Salary", "Job Salary"),
+webGrid.Column("NOP", "NUmber of Openings"),
+webGrid.Column("doe", "Application close Date"),
+webGrid.Column("status", "Job Status"),
+webGrid.Column("approvalstatus", "Approval Status"),
+webGrid.Column("", "", format: @<a class="btn btn-danger" onclick="alertmsg('@item.reqid')">Cancel</a>)))
+
+</div>

@@ -11,7 +11,8 @@ namespace jobportal.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class register
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -23,15 +24,43 @@ namespace jobportal.Models
         }
     
         public int resumekey { get; set; }
+        [Required(ErrorMessage = "First Name is a Required field.")]
+        [RegularExpression("^[a-zA-Z']+$", ErrorMessage = "First name can have only alphabets")]
         public string firstname { get; set; }
+
+        [Required(ErrorMessage = "Last Name is a Required field.")]
+        [RegularExpression("^[a-zA-Z']+$", ErrorMessage = "Last name can have only alphabets")]
         public string lastname { get; set; }
+
+        [Required(ErrorMessage = "User Name is a Required field.")]
+
+        [RegularExpression("^[a-zA-Z']+", ErrorMessage = "User name Should Start with Alphabet only")]
         public string username { get; set; }
+
+        [Required(ErrorMessage = "Password cannot be empty")]
+        [StringLength(18, MinimumLength = 8, ErrorMessage = "Password length must be between 8 to 18 characters")]
         public string password { get; set; }
+
+        [Required(ErrorMessage = "E-Mail is a required field")]
+        [EmailAddress(ErrorMessage = "Enter a valid E-Mail")]
         public string email { get; set; }
+
+
+        [Required(ErrorMessage = "Date of birth is a required field")]
         public Nullable<System.DateTime> dob { get; set; }
-        public Nullable<int> phonenumber { get; set; }
+
+        [Required(ErrorMessage = "Phone Number is a required field")]
+        [RegularExpression("^[1-9][0-9]{9}$", ErrorMessage = "enter the ")]
+
+        public string phonenumber { get; set; }
+
+        [Required(ErrorMessage = "Gender is a required field")]
+
         public Nullable<bool> gender { get; set; }
+
+        [Required(ErrorMessage = "Nationality is a required field")]
         public string Nationality { get; set; }
+
         public string resumepath { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

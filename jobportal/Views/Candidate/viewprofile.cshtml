@@ -1,0 +1,74 @@
+﻿@model jobportal.Models.register
+@{
+    ViewBag.Title = "viewprofile";
+    Layout = "~/Views/Shared/candidateLayout.cshtml";
+}
+<script>
+    function viewpdf() {
+        window.location.href = "/Candidate/GetReport/";
+    }
+</script>
+<h2>viewprofile</h2>
+
+<br />
+<br />
+<br />
+<br />
+
+<div class="row d-flex justify-content-center">
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="container">
+                <form method="post">
+                    <label>Firstname:</label>
+                    @Html.TextBoxFor(c => c.firstname, new { @class = "form-control", @Value = Model.firstname })
+                    <span style="color:red;font-weight:bold">
+                        @Html.ValidationMessageFor(c => c.firstname)
+                    </span><br />
+                    <label>Lastname:</label>
+                    @Html.TextBoxFor(c => c.lastname, new { @class = "form-control", @Value = Model.lastname })
+                    <span style="color:red;font-weight:bold">
+                        @Html.ValidationMessageFor(c => c.lastname)
+                    </span><br />
+
+                    <label>Email:</label>
+                    @Html.TextBoxFor(c => c.email, new { @class = "form-control", @Value = Model.email })
+                    <span style="color:red;font-weight:bold">
+                        @Html.ValidationMessageFor(c => c.email)
+                    </span><br />
+
+                    <label>Contact number:</label>
+                    @Html.TextBoxFor(c => c.phonenumber, new { @class = "form-control", @name = "ph", @Value = Model.phonenumber })
+                    <span style="color:red;font-weight:bold">
+                        @Html.ValidationMessageFor(c => c.phonenumber)
+                    </span><br />
+                    <input type="submit" value="Edit" class="btn btn-success" />
+                </form>
+                <br>
+                <button onclick="viewpdf()">View Resume</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row justify-content-center" style="margin-top:100px">
+    <div class="col-sm-4">
+        <div class="card">
+            <div class="container">
+                <form method="post" enctype="multipart/form-data" action="resumeupload">
+                    <label>Upload Resume</label>&nbsp; &nbsp;
+                    @Html.TextBox("file", "", new { type = "file", @required = "required" }) <br />
+                    <input type="submit" value="Upload" class="btn btn-success" />
+                    <br />
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="text-center text-info">
+    @TempData["profileupdate"]<br/>
+
+    @TempData["up"]<br />
+    @TempData["re"]<br />
+    @TempData["fe"]<br />
+</div>

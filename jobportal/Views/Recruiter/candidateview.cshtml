@@ -1,0 +1,80 @@
+﻿@model List<jobportal.Controllers.candidateVmodel>
+@{
+    ViewBag.Title = "candidateview";
+    Layout = "~/Views/Shared/Recruitermaster.cshtml";
+}
+<script>
+    function viewpdf(id) {
+        window.location.href = "/Home/GetResume/?id=" + id;
+    }
+</script>
+<h2>candidateview</h2>
+<h2>Basic Details :</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th sccope="col">Firstname</th>
+            <th scope="col">Lastname</th>
+            <th scope="col">Email</th>
+            <th scope="col">Contactnumber</th>
+            <th scope="col">Resume</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.reg.firstname</td>
+                <td>@item.reg.lastname</td>
+                <td>@item.reg.email</td>
+                <td>@item.reg.phonenumber</td>
+                <td><a class="btn btn-success" onclick="viewpdf('@item.reg.resumekey')">View Resume</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+<table class="table">
+    <h2>Qualification</h2>
+    <thead>
+        <tr>
+            <th sccope="col">Qualification</th>
+            <th scope="col">Institue</th>
+            <th scope="col">Year of Completion</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.qualification.Qualification1</td>
+                <td>@item.qualification.institutename</td>
+                <td>@item.qualification.YOC</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<table class="table">
+    <h2>Experience</h2>
+    <thead>
+        <tr>
+            <th sccope="col">Company Name</th>
+            <th scope="col">Date of Joining</th>
+            <th scope="col">Year of Experience</th>
+            <th sccope="col">Job Title</th>
+            <th sccope="col">Responsibilities</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.experience.companyname</td>
+                <td>@item.experience.doj</td>
+                <td>@item.experience.yoe</td>
+                <td>@item.experience.jobtitle</td>
+                <td>@item.experience.responsibilities</td>
+            </tr>
+        }
+    </tbody>
+    </table>

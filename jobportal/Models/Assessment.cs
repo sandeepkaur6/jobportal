@@ -12,14 +12,14 @@ namespace jobportal.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class qualification
+    public partial class Assessment
     {
-        public int qid { get; set; }
-        public Nullable<int> resumekey { get; set; }
-        public string Qualification1 { get; set; }
-        public string institutename { get; set; }
-        public Nullable<int> YOC { get; set; }
-    
-        public virtual register register { get; set; }
+        public int questionid { get; set; }
+        public string question { get; set; }
+        public string option1 { get; set; }
+        public string option2 { get; set; }
+        public string option3 { get; set; }
+        public string option4 { get; set; }
+        public string answer { get; set; }
     }
 }

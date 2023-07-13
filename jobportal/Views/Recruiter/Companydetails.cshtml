@@ -1,0 +1,59 @@
+﻿@model List<jobportal.Models.Company>
+@{
+    ViewBag.Title = "Companydetails";
+    Layout = "~/Views/Shared/Recruitermaster.cshtml";
+    WebGrid dhj = new WebGrid(source: Model,canSort:false);
+}
+<style type="text/css">
+    .webgrid-table {
+
+        width: 100%;
+        border-collapse: separate;
+        border: solid 1px darkturquoise;
+        background-color: white;
+    }
+
+   
+
+    .webgrid-header {
+        background-color: dimgrey;
+        text-decoration: none;
+        color: white;
+        padding-bottom: 4px;
+        padding-top: 5px;
+        text-align: left;
+    }
+
+    .webgrid-footer {
+    }
+
+    .webgrid-row-style {
+        padding: 3px 7px 2px;
+    }
+</style>
+<br>
+<br>
+<br>
+
+<h2 class="text-center" style="color:grey">Company details</h2>
+
+@dhj.GetHtml(
+          htmlAttributes: new { @id = "WebGrid", @class = "table" },
+          tableStyle: "webgrid-table",
+   headerStyle: "webgrid-header",
+   footerStyle: "webgrid-footer",
+   alternatingRowStyle: "webgrid-alternating-row",
+   rowStyle: "webgrid-row-style",
+          columns: dhj.Columns(
+        dhj.Column("Companyid", "Company ID"),
+    dhj.Column("Companyname", "Name Of company"),
+    dhj.Column("email", "Email"),
+    dhj.Column("Username", "Username"),
+    dhj.Column("Password", "Password"),
+    dhj.Column("phnumber", "Contact number"),
+    dhj.Column("City", "City"),
+    dhj.Column("IndustryType", "Industry type")
+    ))
+
+
+

@@ -1,0 +1,29 @@
+﻿@model jobportal.Models.qualification
+@{
+    ViewBag.Title = "Qualification";
+    Layout = "~/Views/Shared/candidateLayout.cshtml";
+}
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<h2 class="text-center" style="color:grey"> Qualification Details</h2>
+<div class="row justify-content-center" style="margin-top:100px">
+    <div class="col-sm-4">
+        <div class="card">
+            <div class="container">
+                <form method="post">
+                    @Html.TextBoxFor(c => c.Qualification1, new { @class = "form-control", placeholder = "Enter Qualification1" })<br />
+                    @Html.TextBoxFor(c => c.institutename, new { @class = "form-control", placeholder = "Enter InstituteName" })<br />
+                    @Html.TextBoxFor(c => c.YOC, new { @class = "form-control", placeholder = "Enter YOC", @type = "date" })<br />                     <input type="submit" name="Save Details" class="btn btn-success" /><div id="S"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+    @TempData["qual"]
+</div>

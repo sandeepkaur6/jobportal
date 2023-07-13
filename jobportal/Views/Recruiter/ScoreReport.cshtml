@@ -1,0 +1,39 @@
+﻿@model List<jobportal.Controllers.candidatescore>
+@{
+    ViewBag.Title = "ScoreReport";
+    Layout = "~/Views/Shared/Recruitermaster.cshtml";
+}
+
+<h2>ScoreReport</h2>
+<script>
+    function req(id) {
+        window.location.href = "/Recruiter/reqview/?reqid=" + id;
+    }
+    function candidateview(id) {
+        window.location.href = "/Recruiter/candidateview/?resumekey=" + id;
+    }
+    </script>
+<table class="table">
+    <thead>
+        <tr>
+            <th sccope="col">Reqid</th>
+            <th scope="col">Candidate ID</th>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">Score</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.Raw("<a onclick='req(" + item.jobdes.reqid + ")'>" + item.jobdes.reqid + "</a>")</td>
+                <td>@Html.Raw("<a onclick='candidateview(" + item.jobdes.resumekey + ")'>" + item.jobdes.resumekey + "</a>")</td>
+                <td>@item.re.firstname</td>
+                <td>@item.re.lastname</td>
+                <td>@item.jobdes.score</td>
+            </tr>
+
+        }
+    </tbody>
+</table>

@@ -1,0 +1,33 @@
+﻿@model jobportal.Models.experience
+@{
+    ViewBag.Title = "Experience";
+    Layout = "~/Views/Shared/candidateLayout.cshtml";
+}
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<h2 class="text-center" style="color:grey">Experience</h2>
+<div class="row justify-content-center" style="margin-top:100px">
+    <div class="col-sm-4">
+        <div class="card">
+            <div class="container">
+                <form method="post">
+                    @Html.TextBoxFor(c => c.companyname, new { @class = "form-control", placeholder = "Enter company name" })<br /><div class="txtDate glyphicon glyphicon-calendar">
+                        @Html.TextBoxFor(c => c.doj, new { @class = "form-control", placeholder = "Enter Date of Joining", @type = "date" })
+                    </div><br />
+                    @Html.DropDownListFor(c => c.yoe, new SelectList(Enumerable.Range(0, 30)), "Year of Experience", new { @class = "form-control" })<br />
+                    @Html.TextBoxFor(c => c.jobtitle, new { @class = "form-control", placeholder = "Enter Job Title" })<br />
+                    @Html.TextAreaFor(c => c.responsibilities, new { @class = "form-control", placeholder = "Enter Roles and Responsibilities" })<br /><input type="submit" name="Save Details" class="btn btn-success" />
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="text-info text-center">
+    @TempData["exp"]
+    @Html.ActionLink("Continue to job search page", "ViewJob")
+</div>

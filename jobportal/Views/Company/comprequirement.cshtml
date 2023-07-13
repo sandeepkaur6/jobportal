@@ -1,0 +1,39 @@
+﻿@model jobportal.Models.req
+@{
+    ViewBag.Title = "comprequirement";
+    Layout = "~/Views/Shared/companyMaster.cshtml";
+}
+<br><br><br><br><br>
+<h2  style="margin:50px;">Submit Job Data</h2>
+
+<div style="margin:50px;border:solid ;max-width:500px" class="card">
+    <form method="post">
+
+        <label>Job Titile</label>
+        @Html.TextBoxFor(c => c.jobtitle, new { @class = "form-control" })<span style="color:red;font-weight:bold">@Html.ValidationMessageFor(c => c.jobtitle)</span>
+        <label>Enter Description of job</label>
+        @Html.TextBoxFor(c => c.description, new { @class = "form-control" })<span style="color:red;font-weight:bold">@Html.ValidationMessageFor(c => c.description)</span>
+        <label>Enter Department</label>
+        @Html.TextBoxFor(c => c.department, new { @class = "form-control" })<span style="color:red;font-weight:bold">@Html.ValidationMessageFor(c => c.department)</span>
+        <label>Enter Job Location</label>
+        @Html.TextBoxFor(c => c.location, new { @class = "form-control" })<span style="color:red;font-weight:bold">@Html.ValidationMessageFor(c => c.location)</span>
+        <label>Enter Job Opening Date</label>
+        @Html.TextBoxFor(c => c.dateopen, new { @class = "form-control", Type = "date" })<span style="color:red;font-weight:bold">@Html.ValidationMessageFor(c => c.dateopen)</span>
+        <label>Enter Experience</label>
+        @Html.TextBoxFor(c => c.Experience, new { @class = "form-control" })<span style="color:red;font-weight:bold">@Html.ValidationMessageFor(c => c.Experience)</span>
+        <label>Enter Salary</label>
+        @Html.TextBoxFor(c => c.Salary, new { @class = "form-control" })<span style="color:red;font-weight:bold">@Html.ValidationMessageFor(c => c.Salary)</span>
+        <label>Enter Number of Openings</label>
+        @Html.TextBoxFor(c => c.NOP, new { @class = "form-control" })<span style="color:red;font-weight:bold">@Html.ValidationMessageFor(c => c.NOP)</span>
+        <label>Enter last Date to Apply</label>
+        @Html.TextBoxFor(c => c.doe, new { @class = "form-control", Type = "date" })<span style="color:red;font-weight:bold">@Html.ValidationMessageFor(c => c.doe)</span>
+        <br />
+        <input type="submit" value="Post Job" class="btn btn-success" />
+
+    </form>
+
+</div>
+<div>
+    @TempData["jobreq"]
+    @TempData["error"]
+</div>

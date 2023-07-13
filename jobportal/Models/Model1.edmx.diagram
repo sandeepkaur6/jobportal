@@ -4,18 +4,19 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="608f48523d454bb5abdcfc57cc4ebf84" Name="Diagram1">
-        <EntityTypeShape EntityType="jobportalModel.Company" Width="1.5" PointX="1.5" PointY="13.375" IsExpanded="true" />
+      <Diagram DiagramId="207b3088451a4799afa2f7cbcc26a142" Name="Diagram1">
+        <EntityTypeShape EntityType="jobportalModel.Assessment" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="jobportalModel.Company" Width="1.5" PointX="1.5" PointY="13.25" IsExpanded="true" />
         <EntityTypeShape EntityType="jobportalModel.experience" Width="1.5" PointX="3" PointY="3" IsExpanded="true" />
         <EntityTypeShape EntityType="jobportalModel.jobsubmission" Width="1.5" PointX="6" PointY="4.375" IsExpanded="true" />
         <EntityTypeShape EntityType="jobportalModel.qualification" Width="1.5" PointX="3" PointY="9.875" IsExpanded="true" />
         <EntityTypeShape EntityType="jobportalModel.register" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
         <EntityTypeShape EntityType="jobportalModel.req" Width="1.5" PointX="3.75" PointY="12.75" IsExpanded="true" />
-        <AssociationConnector Association="jobportalModel.FK__req__companyid__2D27B809" ManuallyRouted="false" />
-        <AssociationConnector Association="jobportalModel.FK__experienc__resum__36B12243" ManuallyRouted="false" />
-        <AssociationConnector Association="jobportalModel.FK__jobsubmis__reqid__30F848ED" ManuallyRouted="false" />
-        <AssociationConnector Association="jobportalModel.FK__jobsubmis__resum__300424B4" ManuallyRouted="false" />
-        <AssociationConnector Association="jobportalModel.FK__qualifica__resum__33D4B598" ManuallyRouted="false" />
+        <AssociationConnector Association="jobportalModel.FK__req__companyid__4316F928" ManuallyRouted="false" />
+        <AssociationConnector Association="jobportalModel.FK__experienc__resum__403A8C7D" ManuallyRouted="false" />
+        <AssociationConnector Association="jobportalModel.FK__jobsubmis__reqid__46E78A0C" ManuallyRouted="false" />
+        <AssociationConnector Association="jobportalModel.FK__jobsubmis__resum__45F365D3" ManuallyRouted="false" />
+        <AssociationConnector Association="jobportalModel.FK__qualifica__resum__3D5E1FD2" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

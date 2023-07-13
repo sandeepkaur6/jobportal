@@ -1,0 +1,94 @@
+﻿@model List<jobportal.Controllers.reqjobmodel>
+
+@{
+    ViewBag.Title = "reqcandview";
+    Layout = "~/Views/Shared/Recruitermaster.cshtml";
+}
+
+
+<script>
+    function viewpdf(id) {
+        window.location.href = "/Home/GetResume/?id=" + id;
+    }
+    function req(id) {
+        window.location.href = "/Recruiter/reqview/?reqid=" + id;
+    }
+    function comp(id) {
+        window.location.href = "/Recruiter/compview/?compid=" + id;
+    }
+</script>
+<br><br><br>
+<h2 style="color:darkslategray" class="text-center">candidateinfo</h2>
+<div>
+    @TempData["assessmentstatus"]
+    @TempData["Selectedstatus"]
+</div>
+<table class="table justify-content-center">
+    <thead>
+        <tr class="text-white bg-secondary">
+            <th sccope="col">Firstname</th>
+            <th scope="col">Lastname</th>
+            <th scope="col">Email</th>
+            <th scope="col">Contactnumber</th>
+            <th scope="col">Date of apply</th>
+            <th scope="col">Score</th>
+            <th scope="col">Req ID</th>
+            <th scope="col">Company ID</th>
+            <th scope="col">Assesmnet status</th>
+            <th scope="col">Resume</th>
+            <th scope="col">Select/Reject candidate</th>
+
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.re.firstname</td>
+                <td>@item.re.lastname</td>
+                <td>@item.re.email</td>
+                <td>@item.re.phonenumber</td>
+                <td>@item.jobdes.appliedon</td>
+                <td>@item.jobdes.score</td>
+                <td>@Html.Raw("<a onclick='req(" + item.jobdes.reqid + ")'>" + item.jobdes.reqid + "</a>")</td>
+                <td>@Html.Raw("<a onclick='comp(" + item.comp1.Companyid + ")'>" + item.comp1.Companyid + "</a>")</td>
+                <td>
+                    @if (item.jobdes.assessmentstatus == true)
+                    {
+                        <label style="color:lightgreen">Assessment Completed</label>
+                    }
+                    else if (item.jobdes.assessmentstatus == false)
+                    {
+                        <label style="color:yellow">Assessment Pending</label>
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Send Assessment", "sendassessment", new { reqid = item.jobdes.reqid, resumekey = item.jobdes.resumekey })
+                    }
+                </td>
+                <td><a class="btn btn-success" onclick="viewpdf('@item.jobdes.resumekey')">View Resume</a></td>
+                <td>
+                    @if (item.jobdes.selected == true)
+                    {
+                        <label style="color:lightgreen">Selected</label>
+                        <label>&nbsp;/&nbsp;</label>
+                        @Html.ActionLink("Reject", "selectto", new { reqid = item.jobdes.reqid, resumekey = item.jobdes.resumekey, ty = "r" })
+                    }
+                    else if (item.jobdes.selected == false)
+                    { @Html.ActionLink("Select", "selectto", new { reqid = item.jobdes.reqid, resumekey = item.jobdes.resumekey, ty = "a" })
+                    <label>&nbsp;/&nbsp;</label>
+                    <label style="color:lightgreen">Rejected</label>
+                }
+                else
+                {
+                    @Html.ActionLink("Select", "selectto", new { reqid = item.jobdes.reqid, resumekey = item.jobdes.resumekey, ty = "a" })
+                    <label>&nbsp;/&nbsp;</label>@Html.ActionLink("Reject", "selectto", new { reqid = item.jobdes.reqid, resumekey = item.jobdes.resumekey, ty = "r" })
+                }
+                </td>
+            </tr>
+
+        }
+    </tbody>
+</table>
+

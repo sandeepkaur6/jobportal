@@ -1,0 +1,51 @@
+﻿@model List<jobportal.Models.req>
+@{
+    ViewBag.Title = "ViewJob";
+    Layout = "~/Views/Shared/candidateLayout.cshtml";
+}
+<br />
+<br />
+<br/><br>
+<h2 style="color:darkslategray" class="text-center">ViewJob</h2>
+<table class="table  justify-content-center">
+    <thead>
+        <tr class="text-white bg-secondary">
+            <th sccope="col">Req ID</th>
+            <th scope="col">CompanyID</th>
+            <th scope="col">JOb Title</th>
+            <th scope="col">Description</th>
+            <th scope="col">Department</th>
+            <th scope="col">Location</th>
+            <th scope="col">Experience</th>
+            <th scope="col">Salary</th>
+            <th scope="col">Apply</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+
+            <tr>
+                <td>@item.reqid</td>
+                <td>@item.companyid</td>
+                <td>@item.jobtitle</td>
+                <td>@item.description</td>
+                <td>@item.department</td>
+                <td>@item.location</td>
+                <td>@item.Experience</td>
+                <td>@item.Salary</td>
+                <td>
+                    @Html.ActionLink("Apply", "Apply", new { reqid = item.reqid })
+
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+
+<div class="text-info text-center">
+    @TempData["submission"]
+</div>
+
+

@@ -1,0 +1,105 @@
+﻿@model List<jobportal.Models.req>
+
+@{
+    ViewBag.Title = "reqview";
+    Layout = "~/Views/Shared/Recruitermaster.cshtml";
+}
+
+<h2>managing</h2>
+
+
+<script type="text/javascript">
+
+    function comp(id) {
+        window.location.href = "/Recruiter/compview/?compid=" + id;
+    }
+    function reqc(id) {
+        window.location.href = "/Recruiter/reqcandview/?reqid=" + id;
+    }
+
+</script>
+<br />
+<br />
+<div>
+    @TempData["ReqStatus"]
+</div>
+
+
+<h2 style="color:darkslategray" class="text-center">Jobs Board</h2>
+<table class="table justify-content-center">
+    <thead>
+        <tr class="text-white bg-secondary">
+            <th sccope="col">Reqid</th>
+            <th scope="col">Company ID</th>
+            <th scope="col">Job Title</th>
+            <th scope="col">Description</th>
+            <th scope="col">Department</th>
+            <th scope="col">Location</th>
+            <th scope="col">Date open</th>
+            <th scope="col">Date of Expiry</th>
+            <th scope="col">Experience</th>
+            <th scope="col">salary</th>
+            <th scope="col">No of Positions</th>
+            <th scope="col">Status</th>
+            <th scope="col">Approval Status</th>
+
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.Raw("<a onclick='reqc(" + item.reqid + ")'>" + item.reqid + "</a>")</td>
+                <td>@Html.Raw("<a onclick='comp(" + item.companyid + ")'>" + item.companyid + "</a>")</td>
+                <td>@item.jobtitle</td>
+                <td>@item.description</td>
+                <td>@item.department</td>
+                <td>@item.location</td>
+                <td>@item.dateopen</td>
+                <td>@item.doe</td>
+                <td>@item.Experience</td>
+                <td>@item.Salary</td>
+                <td>@item.NOP</td>
+                <td>
+                    @if (item.status == 1)
+                    {
+                        <label style="color:lightgreen">Open</label>
+
+                    }
+                    else if (item.approvalstatus == 2)
+                    {
+                        <label style="color:lightgreen">Cancel</label>
+                    }
+                    else
+                    {
+                        <label style="color:yellow">No Status/ Expired</label>
+                    }
+                </td>
+
+                <td>
+                    @if (item.approvalstatus == 1)
+                    {
+                        <label style="color:lightgreen">Approved</label>
+                        <label>&nbsp;/&nbsp;</label>
+                        @Html.ActionLink("Reject", "reqstatusupdate", new { reqid = @item.reqid, ty = "r" })
+                    }
+                    else if (item.approvalstatus == 0)
+                    { @Html.ActionLink("Approve", "reqstatusupdate", new { reqid = @item.reqid, ty = "a" })
+                    <label>&nbsp;/&nbsp;</label>
+                    <label style="color:lightgreen">Rejected</label>
+                }
+                else
+                {
+                    @Html.ActionLink("Approve", "reqstatusupdate", new { reqid = @item.reqid, ty = "a" })
+                    <label>&nbsp;/&nbsp;</label>
+                    @Html.ActionLink("Reject", "reqstatusupdate", new { reqid = @item.reqid, ty = "r" })
+                }
+                </td>
+            </tr>
+
+        }
+    </tbody>
+</table>
+
+

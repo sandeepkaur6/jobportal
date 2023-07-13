@@ -17,5 +17,14 @@ namespace jobportal
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
+        protected void Session_Start(object sender, EventArgs e)
+        {
+            Session["ruser"] = "";
+            Session["Canduser"] = "";
+            Session["Compuser"] = "";
+            Session["Resumekey"] = "";
+            Session["Companyid"] = "";
+
+        }
     }
 }

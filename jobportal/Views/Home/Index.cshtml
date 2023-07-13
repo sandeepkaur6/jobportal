@@ -1,31 +1,69 @@
-﻿@{
+﻿@model List<jobportal.Models.req>
+@{
     ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+<div class="container">
+    <div class="row">
+
+        @*<div class="row" style="margin-top:10px">*@
+
+        <div class="col-xs-12 col-sm-12 p-3 col-md-6" style="height:370px;">
+            <div id="search-bar">
+                <form>
+                    <div class="input-group">
+                       
+                    </div>
+
+                </form>
+            </div>
+            <div id="div-tag" class="overflow-auto mt-2" style="height:100%; background-color: #e5e5e5; border: 1px solid gray">
+                @foreach (var item in Model)
+                {
+                    <div class="col-md-12 p-3">
+                        <div id="div-tag" class="overflow-auto mt-2 ml-4 rounded bg-light p-4 w-90 h-25" style="border: 1px solid gray">
+                                <b class="text-primary">@item.jobtitle</b><br>
+                            <b>ReqNo.@item.reqid</b> <br>
+                            <b>@item.location</b><br>
+                            Description:@item.description,
+                        </div>
+                    </div>
+                }
+
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-12 p-3 col-md-6" style="margin-top:18px; height:384px; background-color: powderblue; border: 1px solid gray;">
+            <div id="login-form">
+                <form method="post" action="MainLogin">
+                    Please Select The login User Type:
+                    @Html.RadioButton("type", "recuiter", new { required = "required" })<label>Recuiter</label>
+                    @Html.RadioButton("type", "company", new { required = "required" }) <label>Company</label>
+                    @Html.RadioButton("type", "candidate", new { required = "required" })<label>Candidate</label>
+                    <h2>Login</h2>  <br />
+                    <label>Enter Username:</label>
+                    <input type="text" name="uname" class="form-control" placeholder="Enter Username" required />
+                    <label>Password:</label>
+                    <input type="password" name="pwd" class="form-control" placeholder="Password" required /><br />
+                    <input type="submit" value="Login" class="btn btn-primary" />
+                </form>
+                <br />
+                <div>
+                    @*change the action link second parameter is action name third parameter is controller name*@
+                    @Html.ActionLink("New Company Registration", "CompRegister", "Company", null, new { @class = "btn btn-info" })
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    @Html.ActionLink("New Candidate Registration", "CandRegister", "Candidate", null, new { @class = "btn btn-info" })
+                </div>
+                <div>
+                    @TempData["typeerror"]
+                    @ViewData["msg"]
+                    @TempData["l"]
+                </div>
+            </div>
+        </div>
+
+        @*</div>*@
     </div>
 </div>
