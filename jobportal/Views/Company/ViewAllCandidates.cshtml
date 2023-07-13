@@ -1,0 +1,72 @@
+﻿@model List<jobportal.Controllers.viewallcandidatemodel>
+@{
+    ViewBag.Title = "ViewAllCandidates";
+    Layout = "~/Views/Shared/companyMaster.cshtml";
+    WebGrid webGrid = new WebGrid(source: Model, canPage: true, rowsPerPage: 10);
+}
+<script>
+    function viewpdf(id) {
+       
+        window.location.href = "/Home/GetResume/?id="+id;
+    }
+</script>
+<h2>ViewAllCandidates</h2>
+<h2>ViewAllCandidates</h2> 
+<style type="text/css">
+        .webgrid-table {
+                font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+                font-size: 10pt;
+                width: 100%;
+                border-collapse: separate;
+                border: solid 1px darkturquoise;
+                background-color: white;
+
+    }
+
+             .webgrid-table td, th {
+                    border: 1px solid darkturquoise;
+                    padding: 3px 7px 2px;
+
+    }
+
+         .webgrid-header {
+                background-color: darkturquoise;
+                color: black;
+                padding-bottom: 4px;
+                padding-top: 5px;
+                text-align: left;
+
+    }
+
+         .webgrid-footer {
+
+    }
+
+         .webgrid-row-style {
+                padding: 3px 7px 2px;
+
+    }
+</style> <div id="d1" style="max-width:90%;overflow-x:auto;margin:60px">
+    @webGrid.GetHtml(
+htmlAttributes: new { @id = "WebGrid", @class = "table table-bordered", @style = "font-size:small" },
+tableStyle: "webgrid-table",
+headerStyle: "webgrid-header",
+footerStyle: "webgrid-footer",
+alternatingRowStyle: "webgrid-alternating-row",
+rowStyle: "webgrid-row-style",
+columns: webGrid.Columns(
+webGrid.Column("requirement.reqid", "Requirement Id"),
+webGrid.Column("regist.firstname", "Candidate First name"),
+webGrid.Column("regist.lastname", "Candidate Last name"),
+webGrid.Column("regist.email", "Candidate E-mail"),
+webGrid.Column("regist.phonenumber", "Candidate Phone Number"),
+webGrid.Column("js.score", "Candidate Assessment Score"),
+webGrid.Column("regist.resumepath", "Candidate Resume", format:@<a class="btn btn-success" onclick="viewpdf('@item.regist.resumekey')">View Resume</a>)
+)) 
+</div> @*select re.reqid,
+    r.firstname,
+    r.lastname,
+    r.resumepath,
+    r.email,
+    r.phonenumber,
+    j.score*@has context menu

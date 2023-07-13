@@ -5,6 +5,18 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
       <Schema Namespace="jobportalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Assessment">
+          <Key>
+            <PropertyRef Name="questionid" />
+          </Key>
+          <Property Name="questionid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="question" Type="varchar" MaxLength="200" />
+          <Property Name="option1" Type="varchar" MaxLength="250" />
+          <Property Name="option2" Type="varchar" MaxLength="250" />
+          <Property Name="option3" Type="varchar" MaxLength="250" />
+          <Property Name="option4" Type="varchar" MaxLength="250" />
+          <Property Name="answer" Type="varchar" MaxLength="250" />
+        </EntityType>
         <EntityType Name="Company">
           <Key>
             <PropertyRef Name="Companyid" />
@@ -14,6 +26,7 @@
           <Property Name="email" Type="varchar" MaxLength="30" />
           <Property Name="Username" Type="varchar" MaxLength="30" />
           <Property Name="Password" Type="varchar" MaxLength="30" />
+          <Property Name="Comweb" Type="varchar" MaxLength="200" />
           <Property Name="City" Type="varchar" MaxLength="30" />
           <Property Name="phnumber" Type="varchar" MaxLength="30" />
           <Property Name="IndustryType" Type="varchar" MaxLength="30" />
@@ -50,7 +63,7 @@
           <Property Name="resumekey" Type="int" />
           <Property Name="Qualification" Type="varchar" MaxLength="100" />
           <Property Name="institutename" Type="varchar" MaxLength="100" />
-          <Property Name="YOC" Type="date" />
+          <Property Name="YOC" Type="int" />
         </EntityType>
         <EntityType Name="register">
           <Key>
@@ -63,7 +76,7 @@
           <Property Name="password" Type="varchar" MaxLength="30" />
           <Property Name="email" Type="varchar" MaxLength="50" />
           <Property Name="dob" Type="date" />
-          <Property Name="phonenumber" Type="int" />
+          <Property Name="phonenumber" Type="varchar" MaxLength="20" />
           <Property Name="gender" Type="bit" />
           <Property Name="Nationality" Type="varchar" MaxLength="30" />
           <Property Name="resumepath" Type="varchar" MaxLength="100" />
@@ -86,7 +99,7 @@
           <Property Name="status" Type="int" />
           <Property Name="approvalstatus" Type="int" />
         </EntityType>
-        <Association Name="FK__experienc__resum__36B12243">
+        <Association Name="FK__experienc__resum__403A8C7D">
           <End Role="register" Type="Self.register" Multiplicity="0..1" />
           <End Role="experience" Type="Self.experience" Multiplicity="*" />
           <ReferentialConstraint>
@@ -98,7 +111,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__jobsubmis__reqid__30F848ED">
+        <Association Name="FK__jobsubmis__reqid__46E78A0C">
           <End Role="req" Type="Self.req" Multiplicity="0..1" />
           <End Role="jobsubmission" Type="Self.jobsubmission" Multiplicity="*" />
           <ReferentialConstraint>
@@ -110,7 +123,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__jobsubmis__resum__300424B4">
+        <Association Name="FK__jobsubmis__resum__45F365D3">
           <End Role="register" Type="Self.register" Multiplicity="0..1" />
           <End Role="jobsubmission" Type="Self.jobsubmission" Multiplicity="*" />
           <ReferentialConstraint>
@@ -122,7 +135,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__qualifica__resum__33D4B598">
+        <Association Name="FK__qualifica__resum__3D5E1FD2">
           <End Role="register" Type="Self.register" Multiplicity="0..1" />
           <End Role="qualification" Type="Self.qualification" Multiplicity="*" />
           <ReferentialConstraint>
@@ -134,7 +147,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__req__companyid__2D27B809">
+        <Association Name="FK__req__companyid__4316F928">
           <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
           <End Role="req" Type="Self.req" Multiplicity="*" />
           <ReferentialConstraint>
@@ -147,29 +160,30 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="jobportalModelStoreContainer">
+          <EntitySet Name="Assessment" EntityType="Self.Assessment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="experience" EntityType="Self.experience" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="jobsubmission" EntityType="Self.jobsubmission" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="qualification" EntityType="Self.qualification" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="register" EntityType="Self.register" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="req" EntityType="Self.req" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__experienc__resum__36B12243" Association="Self.FK__experienc__resum__36B12243">
+          <AssociationSet Name="FK__experienc__resum__403A8C7D" Association="Self.FK__experienc__resum__403A8C7D">
             <End Role="register" EntitySet="register" />
             <End Role="experience" EntitySet="experience" />
           </AssociationSet>
-          <AssociationSet Name="FK__jobsubmis__reqid__30F848ED" Association="Self.FK__jobsubmis__reqid__30F848ED">
+          <AssociationSet Name="FK__jobsubmis__reqid__46E78A0C" Association="Self.FK__jobsubmis__reqid__46E78A0C">
             <End Role="req" EntitySet="req" />
             <End Role="jobsubmission" EntitySet="jobsubmission" />
           </AssociationSet>
-          <AssociationSet Name="FK__jobsubmis__resum__300424B4" Association="Self.FK__jobsubmis__resum__300424B4">
+          <AssociationSet Name="FK__jobsubmis__resum__45F365D3" Association="Self.FK__jobsubmis__resum__45F365D3">
             <End Role="register" EntitySet="register" />
             <End Role="jobsubmission" EntitySet="jobsubmission" />
           </AssociationSet>
-          <AssociationSet Name="FK__qualifica__resum__33D4B598" Association="Self.FK__qualifica__resum__33D4B598">
+          <AssociationSet Name="FK__qualifica__resum__3D5E1FD2" Association="Self.FK__qualifica__resum__3D5E1FD2">
             <End Role="register" EntitySet="register" />
             <End Role="qualification" EntitySet="qualification" />
           </AssociationSet>
-          <AssociationSet Name="FK__req__companyid__2D27B809" Association="Self.FK__req__companyid__2D27B809">
+          <AssociationSet Name="FK__req__companyid__4316F928" Association="Self.FK__req__companyid__4316F928">
             <End Role="Company" EntitySet="Company" />
             <End Role="req" EntitySet="req" />
           </AssociationSet>
@@ -179,6 +193,18 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="jobportalModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Assessment">
+          <Key>
+            <PropertyRef Name="questionid" />
+          </Key>
+          <Property Name="questionid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="question" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="option1" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="option2" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="option3" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="option4" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="answer" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+        </EntityType>
         <EntityType Name="Company">
           <Key>
             <PropertyRef Name="Companyid" />
@@ -188,10 +214,11 @@
           <Property Name="email" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="Username" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="Password" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Comweb" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="City" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="phnumber" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="IndustryType" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="reqs" Relationship="Self.FK__req__companyid__2D27B809" FromRole="Company" ToRole="req" />
+          <NavigationProperty Name="reqs" Relationship="Self.FK__req__companyid__4316F928" FromRole="Company" ToRole="req" />
         </EntityType>
         <EntityType Name="experience">
           <Key>
@@ -204,7 +231,7 @@
           <Property Name="yoe" Type="Int32" />
           <Property Name="jobtitle" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="responsibilities" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="register" Relationship="Self.FK__experienc__resum__36B12243" FromRole="experience" ToRole="register" />
+          <NavigationProperty Name="register" Relationship="Self.FK__experienc__resum__403A8C7D" FromRole="experience" ToRole="register" />
         </EntityType>
         <EntityType Name="jobsubmission">
           <Key>
@@ -217,8 +244,8 @@
           <Property Name="score" Type="Int32" />
           <Property Name="assessmentstatus" Type="Boolean" />
           <Property Name="appliedon" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="req" Relationship="Self.FK__jobsubmis__reqid__30F848ED" FromRole="jobsubmission" ToRole="req" />
-          <NavigationProperty Name="register" Relationship="Self.FK__jobsubmis__resum__300424B4" FromRole="jobsubmission" ToRole="register" />
+          <NavigationProperty Name="req" Relationship="Self.FK__jobsubmis__reqid__46E78A0C" FromRole="jobsubmission" ToRole="req" />
+          <NavigationProperty Name="register" Relationship="Self.FK__jobsubmis__resum__45F365D3" FromRole="jobsubmission" ToRole="register" />
         </EntityType>
         <EntityType Name="qualification">
           <Key>
@@ -228,8 +255,8 @@
           <Property Name="resumekey" Type="Int32" />
           <Property Name="Qualification1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="institutename" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="YOC" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="register" Relationship="Self.FK__qualifica__resum__33D4B598" FromRole="qualification" ToRole="register" />
+          <Property Name="YOC" Type="Int32" />
+          <NavigationProperty Name="register" Relationship="Self.FK__qualifica__resum__3D5E1FD2" FromRole="qualification" ToRole="register" />
         </EntityType>
         <EntityType Name="register">
           <Key>
@@ -242,13 +269,13 @@
           <Property Name="password" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="dob" Type="DateTime" Precision="0" />
-          <Property Name="phonenumber" Type="Int32" />
+          <Property Name="phonenumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="gender" Type="Boolean" />
           <Property Name="Nationality" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="resumepath" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="experiences" Relationship="Self.FK__experienc__resum__36B12243" FromRole="register" ToRole="experience" />
-          <NavigationProperty Name="jobsubmissions" Relationship="Self.FK__jobsubmis__resum__300424B4" FromRole="register" ToRole="jobsubmission" />
-          <NavigationProperty Name="qualifications" Relationship="Self.FK__qualifica__resum__33D4B598" FromRole="register" ToRole="qualification" />
+          <NavigationProperty Name="experiences" Relationship="Self.FK__experienc__resum__403A8C7D" FromRole="register" ToRole="experience" />
+          <NavigationProperty Name="jobsubmissions" Relationship="Self.FK__jobsubmis__resum__45F365D3" FromRole="register" ToRole="jobsubmission" />
+          <NavigationProperty Name="qualifications" Relationship="Self.FK__qualifica__resum__3D5E1FD2" FromRole="register" ToRole="qualification" />
         </EntityType>
         <EntityType Name="req">
           <Key>
@@ -267,10 +294,10 @@
           <Property Name="doe" Type="DateTime" Precision="0" />
           <Property Name="status" Type="Int32" />
           <Property Name="approvalstatus" Type="Int32" />
-          <NavigationProperty Name="Company" Relationship="Self.FK__req__companyid__2D27B809" FromRole="req" ToRole="Company" />
-          <NavigationProperty Name="jobsubmissions" Relationship="Self.FK__jobsubmis__reqid__30F848ED" FromRole="req" ToRole="jobsubmission" />
+          <NavigationProperty Name="Company" Relationship="Self.FK__req__companyid__4316F928" FromRole="req" ToRole="Company" />
+          <NavigationProperty Name="jobsubmissions" Relationship="Self.FK__jobsubmis__reqid__46E78A0C" FromRole="req" ToRole="jobsubmission" />
         </EntityType>
-        <Association Name="FK__req__companyid__2D27B809">
+        <Association Name="FK__req__companyid__4316F928">
           <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
           <End Role="req" Type="Self.req" Multiplicity="*" />
           <ReferentialConstraint>
@@ -282,7 +309,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__experienc__resum__36B12243">
+        <Association Name="FK__experienc__resum__403A8C7D">
           <End Role="register" Type="Self.register" Multiplicity="0..1" />
           <End Role="experience" Type="Self.experience" Multiplicity="*" />
           <ReferentialConstraint>
@@ -294,7 +321,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__jobsubmis__reqid__30F848ED">
+        <Association Name="FK__jobsubmis__reqid__46E78A0C">
           <End Role="req" Type="Self.req" Multiplicity="0..1" />
           <End Role="jobsubmission" Type="Self.jobsubmission" Multiplicity="*" />
           <ReferentialConstraint>
@@ -306,7 +333,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__jobsubmis__resum__300424B4">
+        <Association Name="FK__jobsubmis__resum__45F365D3">
           <End Role="register" Type="Self.register" Multiplicity="0..1" />
           <End Role="jobsubmission" Type="Self.jobsubmission" Multiplicity="*" />
           <ReferentialConstraint>
@@ -318,7 +345,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__qualifica__resum__33D4B598">
+        <Association Name="FK__qualifica__resum__3D5E1FD2">
           <End Role="register" Type="Self.register" Multiplicity="0..1" />
           <End Role="qualification" Type="Self.qualification" Multiplicity="*" />
           <ReferentialConstraint>
@@ -330,30 +357,31 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="jobportalEntities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="jobportalEntities2" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Assessments" EntityType="Self.Assessment" />
           <EntitySet Name="Companies" EntityType="Self.Company" />
           <EntitySet Name="experiences" EntityType="Self.experience" />
           <EntitySet Name="jobsubmissions" EntityType="Self.jobsubmission" />
           <EntitySet Name="qualifications" EntityType="Self.qualification" />
           <EntitySet Name="registers" EntityType="Self.register" />
           <EntitySet Name="reqs" EntityType="Self.req" />
-          <AssociationSet Name="FK__req__companyid__2D27B809" Association="Self.FK__req__companyid__2D27B809">
+          <AssociationSet Name="FK__req__companyid__4316F928" Association="Self.FK__req__companyid__4316F928">
             <End Role="Company" EntitySet="Companies" />
             <End Role="req" EntitySet="reqs" />
           </AssociationSet>
-          <AssociationSet Name="FK__experienc__resum__36B12243" Association="Self.FK__experienc__resum__36B12243">
+          <AssociationSet Name="FK__experienc__resum__403A8C7D" Association="Self.FK__experienc__resum__403A8C7D">
             <End Role="register" EntitySet="registers" />
             <End Role="experience" EntitySet="experiences" />
           </AssociationSet>
-          <AssociationSet Name="FK__jobsubmis__reqid__30F848ED" Association="Self.FK__jobsubmis__reqid__30F848ED">
+          <AssociationSet Name="FK__jobsubmis__reqid__46E78A0C" Association="Self.FK__jobsubmis__reqid__46E78A0C">
             <End Role="req" EntitySet="reqs" />
             <End Role="jobsubmission" EntitySet="jobsubmissions" />
           </AssociationSet>
-          <AssociationSet Name="FK__jobsubmis__resum__300424B4" Association="Self.FK__jobsubmis__resum__300424B4">
+          <AssociationSet Name="FK__jobsubmis__resum__45F365D3" Association="Self.FK__jobsubmis__resum__45F365D3">
             <End Role="register" EntitySet="registers" />
             <End Role="jobsubmission" EntitySet="jobsubmissions" />
           </AssociationSet>
-          <AssociationSet Name="FK__qualifica__resum__33D4B598" Association="Self.FK__qualifica__resum__33D4B598">
+          <AssociationSet Name="FK__qualifica__resum__3D5E1FD2" Association="Self.FK__qualifica__resum__3D5E1FD2">
             <End Role="register" EntitySet="registers" />
             <End Role="qualification" EntitySet="qualifications" />
           </AssociationSet>
@@ -363,7 +391,20 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="jobportalModelStoreContainer" CdmEntityContainer="jobportalEntities1">
+        <EntityContainerMapping StorageEntityContainer="jobportalModelStoreContainer" CdmEntityContainer="jobportalEntities2">
+          <EntitySetMapping Name="Assessments">
+            <EntityTypeMapping TypeName="jobportalModel.Assessment">
+              <MappingFragment StoreEntitySet="Assessment">
+                <ScalarProperty Name="questionid" ColumnName="questionid" />
+                <ScalarProperty Name="question" ColumnName="question" />
+                <ScalarProperty Name="option1" ColumnName="option1" />
+                <ScalarProperty Name="option2" ColumnName="option2" />
+                <ScalarProperty Name="option3" ColumnName="option3" />
+                <ScalarProperty Name="option4" ColumnName="option4" />
+                <ScalarProperty Name="answer" ColumnName="answer" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Companies">
             <EntityTypeMapping TypeName="jobportalModel.Company">
               <MappingFragment StoreEntitySet="Company">
@@ -372,6 +413,7 @@
                 <ScalarProperty Name="email" ColumnName="email" />
                 <ScalarProperty Name="Username" ColumnName="Username" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Comweb" ColumnName="Comweb" />
                 <ScalarProperty Name="City" ColumnName="City" />
                 <ScalarProperty Name="phnumber" ColumnName="phnumber" />
                 <ScalarProperty Name="IndustryType" ColumnName="IndustryType" />

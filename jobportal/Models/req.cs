@@ -11,7 +11,8 @@ namespace jobportal.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class req
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,21 +20,35 @@ namespace jobportal.Models
         {
             this.jobsubmissions = new HashSet<jobsubmission>();
         }
-    
         public int reqid { get; set; }
         public Nullable<int> companyid { get; set; }
+        [Required(ErrorMessage = "Job Title is a Mandatory filed")]
         public string jobtitle { get; set; }
+        [Required(ErrorMessage = "Job Description is a Mandatory filed")]
         public string description { get; set; }
+
+        [Required(ErrorMessage = "Job Department is a Mandatory filed")]
         public string department { get; set; }
+
+        [Required(ErrorMessage = "Work Location is a Mandatory filed")]
         public string location { get; set; }
+
+        [Required(ErrorMessage = "Application start date is a Mandatory filed")]
         public Nullable<System.DateTime> dateopen { get; set; }
+
+        [Required(ErrorMessage = "Minimum experience is a Mandatory filed")]
         public Nullable<int> Experience { get; set; }
+
+        [Required(ErrorMessage = "Job salary is a Mandatory filed")]
         public Nullable<int> Salary { get; set; }
+
+        [Required(ErrorMessage = "Number of Openings is a Mandatory filed")]
         public Nullable<int> NOP { get; set; }
+
+        [Required(ErrorMessage = "Application End date is a Mandatory filed")]
         public Nullable<System.DateTime> doe { get; set; }
         public Nullable<int> status { get; set; }
         public Nullable<int> approvalstatus { get; set; }
-    
         public virtual Company Company { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<jobsubmission> jobsubmissions { get; set; }

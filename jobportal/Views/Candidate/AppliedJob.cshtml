@@ -1,0 +1,43 @@
+﻿@model List<jobportal.Controllers.jobreqmodel>
+@{
+    ViewBag.Title = "AppliedJob";
+    Layout = "~/Views/Shared/candidateLayout.cshtml";
+}
+
+<br/><br/><br/>
+<br/>
+<h2 style="color:darkslategray" class="text-center">Submitted JOBS</h2>
+<table class="table">
+    <thead>
+        <tr class="text-white bg-secondary">
+            <th sccope="col">Req ID</th>
+            <th scope="col">Applied on</th>
+            <th scope="col">JOb Title</th>
+            <th scope="col">Description</th>
+            <th scope="col">Department</th>
+            <th scope="col">Location</th>
+            <th scope="col">Experience</th>
+            <th scope="col">Withdraw application</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var item in Model)
+            {
+     
+            <tr>
+             <td>@item.jobdes.reqid</td> 
+             <td>@item.jobdes.appliedon</td>
+             <td>@item.re.jobtitle</td>
+             <td>@item.re.description</td>
+             <td>@item.re.department</td>
+                <td>@item.re.location</td>
+                <td>@item.re.Experience</td>
+                <td>@Html.ActionLink("Withdraw", "Withdraw",new {reqid= @item.jobdes.reqid,resumekey=item.jobdes.resumekey})</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div class="text-center text-info">
+    @TempData["with"]
+    </div>

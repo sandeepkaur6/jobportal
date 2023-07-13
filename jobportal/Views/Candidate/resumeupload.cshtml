@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewBag.Title = "resumeupload";
+    Layout = "~/Views/Shared/candidateLayout.cshtml";
+}
+<br>
+<br>
+<br>
+<br>
+<br>
+<h2 class="text-center" style="color:grey">Resume Upload</h2>
+<div class="row justify-content-center" style="margin-top:100px">
+    <div class="col-sm-4">
+        <div class="card">
+            <div class="container">
+                <form method="post" enctype="multipart/form-data">
+                    <label>Upload Resume</label>&nbsp; &nbsp;
+                    @Html.TextBox("file", "", new { type = "file", @required = "required" }) <br />
+                    <input type="submit" value="Upload" class="btn btn-success" />
+                    <br />
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+
+    @TempData["up"]<br />
+    @TempData["re"]<br />
+    @TempData["fe"]<br />
+</div>
+

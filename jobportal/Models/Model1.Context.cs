@@ -13,10 +13,10 @@ namespace jobportal.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class jobportalEntities1 : DbContext
+    public partial class jobportalEntities2 : DbContext
     {
-        public jobportalEntities1()
-            : base("name=jobportalEntities1")
+        public jobportalEntities2()
+            : base("name=jobportalEntities2")
         {
         }
     
@@ -25,6 +25,7 @@ namespace jobportal.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Assessment> Assessments { get; set; }
         public virtual DbSet<Company> Companies { get; set; }
         public virtual DbSet<experience> experiences { get; set; }
         public virtual DbSet<jobsubmission> jobsubmissions { get; set; }

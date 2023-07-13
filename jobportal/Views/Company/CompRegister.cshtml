@@ -1,0 +1,69 @@
+﻿@model jobportal.Models.Company
+@{
+    ViewBag.Title = "CompRegister";
+    Layout = "~/Views/Shared/companyMaster.cshtml";
+}
+
+<h2>Registration Form for Company</h2>
+<div class="row d-flex justify-content-center" style="margin-top:42px">
+    <div class="col-sm-8">
+        <div class="card">
+            <div class="container">
+                <form method="post" class="p-4">
+                    <label>Company Name:</label>
+                    @Html.TextBoxFor(c => c.Companyname, new { @class = "form-control" })<br />
+                    <span style="color:red;font-weight:bold">
+                        @Html.ValidationMessageFor(c => c.Companyname)
+                    </span>
+
+                    <label>Email:</label>
+                    @Html.TextBoxFor(c => c.email, new { @class = "form-control" })<br />
+                    <span style="color:red;font-weight:bold">
+                        @Html.ValidationMessageFor(c => c.email)
+                    </span>
+
+                    <label>Website:</label>
+                    @Html.TextBoxFor(c => c.Comweb, new { @class = "form-control" })<br />
+                   
+                    <label>Username:</label>
+                    @Html.TextBoxFor(c => c.Username, new { @class = "form-control" })<br />
+                    <span style="color:red;font-weight:bold">
+                        @Html.ValidationMessageFor(c => c.Username)
+                    </span>
+
+                    <label>Password:</label>
+                    @Html.PasswordFor(c => c.Password, new { @class = "form-control" })<br />
+                    <span style="color:red;font-weight:bold">
+                        @Html.ValidationMessageFor(c => c.Password)
+                    </span>
+
+                    <label>City:</label>
+                    @Html.TextBoxFor(c => c.City, new { @class = "form-control" })<br />
+
+                    <label>Contact Number:</label>
+                    @Html.TextBoxFor(c => c.phnumber, new { @class = "form-control" })<br />
+                    <span style="color:red;font-weight:bold">
+                        @Html.ValidationMessageFor(c => c.phnumber)
+                    </span>
+
+                    <label>Industry Type:</label>
+                    @{
+                        List<SelectListItem> ob = new List<SelectListItem>()
+                                                                                                                                                             {
+                             new SelectListItem(){Text="Financial services"},
+                             new SelectListItem(){Text="Professional services."},
+                             new SelectListItem(){Text="Product Sevices"},
+                             new SelectListItem(){Text="Others"}
+                          };
+                        @Html.DropDownListFor(c => c.IndustryType, ob, new { @class = "form-control" })<br />
+                    }
+                    <input type="submit" value="Register" class="btn btn-success" />
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+    @TempData["in"]
+</div>

@@ -1,0 +1,69 @@
+﻿@model jobportal.Models.register
+@{
+    ViewBag.Title = "candRegister";
+    Layout = "~/Views/Shared/candidateLayout.cshtml";
+}
+
+<br />
+<br />
+<br />
+<br />
+<h2 style="color:darkslategray" class="text-center">Candidate Register</h2>
+<div class="row d-flex justify-content-center">
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="container">
+                <form method="post">
+                    <label>Firstname:</label>
+                    @Html.TextBoxFor(c => c.firstname, new { @class = "form-control", @name = "fn" })
+                    <span style="color:red;font-weight:bold">
+                        @Html.ValidationMessageFor(c => c.firstname)
+                    </span><br />
+                    <label>Lastname:</label>
+                    @Html.TextBoxFor(c => c.lastname, new { @class = "form-control" })
+                    <span style="color:red;font-weight:bold">
+                        @Html.ValidationMessageFor(c => c.lastname)
+                    </span><br />
+                    <label>Username:</label>
+                    @Html.TextBoxFor(c => c.username, new { @class = "form-control" })
+                    <span style="color:red;font-weight:bold">
+                        @Html.ValidationMessageFor(c => c.username)
+                    </span><br />
+                    <label>Password:</label>
+                    @Html.PasswordFor(c => c.password, new { @class = "form-control" })
+                    <span style="color:red;font-weight:bold">
+                        @Html.ValidationMessageFor(c => c.password)
+                    </span><br />
+                    <label>Email:</label>
+                    @Html.TextBoxFor(c => c.email, new { @class = "form-control" })
+                    <span style="color:red;font-weight:bold">
+                        @Html.ValidationMessageFor(c => c.email)
+                    </span><br />
+                    <label>DOB:</label>
+                    @Html.TextBoxFor(c => c.dob, new { @class = "form-control", @type = "date" })
+                    <span style="color:red;font-weight:bold">
+                        @Html.ValidationMessageFor(c => c.dob)
+                    </span><br />
+                    <label>Contact number:</label>
+                    @Html.TextBoxFor(c => c.phonenumber, new { @class = "form-control", @name = "ph", @type = "number" })
+                    <span style="color:red;font-weight:bold">
+                        @Html.ValidationMessageFor(c => c.phonenumber)
+                    </span><br />
+
+                    <label>Select Gender:</label>
+                    @Html.RadioButtonFor(c => c.gender, true, new { @class = "form-check-input" })Male
+                    @Html.RadioButtonFor(c => c.gender, false, new { @class = "form-check-input" }) Female
+                    <br>
+                    <label>Select Nationality:</label>
+                    @Html.TextBoxFor(c => c.Nationality, new { @class = "form-control" })
+
+                    <input type="submit" value="Register" class="btn btn-success" />
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="bg-info justify-content-center">
+    @TempData["error"]
+    @TempData["register"]
+</div>

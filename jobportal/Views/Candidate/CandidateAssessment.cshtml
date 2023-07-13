@@ -1,0 +1,113 @@
+﻿@model List<jobportal.Models.Assessment>
+@{
+    ViewBag.Title = "CandidateAssessment";
+    Layout = "~/Views/Shared/candidateLayout.cshtml";
+}
+<br><br /><br /><br /><br />
+<div class="row d-flexa justify-content-center">
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="container">
+                <h2 class="justify-content-center">Mock Test Page</h2>
+                <form method="post">
+                    <p> 1- What is correct syntax for main method of a java class?</p>
+                    <label>
+                        <input type="radio" name="q1" value="public static int main(String[] args)" />
+                        a) public static int main(String[] args)
+                    </label><br />
+                    <label>
+                        <input type="radio" name="q1" value="public int main(String[] args)" />
+                        b) public int main(String[] args)
+                    </label><br />
+                    <label>
+                        <input type="radio" name="q1" value="public static void main(String[] args)" />
+                        c) public static void main(String[] args)
+                    </label><br />
+                    <label>
+                        <input type="radio" name="q1" value="Nono Of the above" />
+                        d) Nono Of the above
+                    </label><br /><br>
+                    <p>2-Which of the following is not a keyword in java?</p>
+                    <label>
+                        <input type="radio" name="q2" value="static" />
+                        a) static
+                    </label><br />
+                    <label>
+                        <input type="radio" name="q2" value="void" />
+                        b) void
+                    </label><br />
+                    <label>
+                        <input type="radio" name="q2" value="Boolean" />
+                        c) Boolean
+                    </label><br />
+                    <label>
+                        <input type="radio" name="q2" value="Private" />
+                        d) Private
+                    </label><br /><br>
+                    <p>3-What of the following is the default value of a local variable?</p>
+                    <label>
+                        <input type="radio" name="q3" value="0" />
+                        a) 0
+                    </label><br />
+                    <label>
+                        <input type="radio" name="q3" value="Null" />
+                        b) Null
+                    </label><br />
+                    <label>
+                        <input type="radio" name="q3" value="Depend upon the type of variable" />
+                        c) Depend upon the type of variable
+                    </label><br />
+                    <label>
+                        <input type="radio" name="q3" value="Not assigned" />
+                        d) Not assigned
+                    </label><br /><br>
+                    <p>4-What is the size of byte variable?</p>
+                    <label>
+                        <input type="radio" name="q4" value="8 bit" />
+                        a) 8 bit
+                    </label><br />
+                    <label>
+                        <input type="radio" name="q4" value="16 bit" />
+                        b) 16 bit
+                    </label><br />
+                    <label>
+                        <input type="radio" name="q4" value="32 bit" />
+                        c) 32 bit
+                    </label><br />
+                    <label>
+                        <input type="radio" name="q4" value="62 bit" />
+                        d) 62 bit
+                    </label><br /><br>
+                    <p>5-What is a class in java?</p>
+                    <label>
+                        <input type="radio" name="q5" value="class is a special data type" />
+                        a) class is a special data type.
+                    </label><br />
+                    <label>
+                        <input type="radio" name="q5" value="A class is a blue print from which individual objects are created.A class can contain fields and methods to describe the behaviour of an object" />
+                        b) A class is a blue print from which individual objects are created. A class can contain fields and methods to describe the behavior of an object.
+                    </label><br />
+                    <label>
+                        <input type="radio" name="q5" value="class is used to allocate memory to a data type" />
+                        c) class is used to allocate memory to a data type.
+                    </label><br />
+                    <label>
+                        <input type="radio" name="q5" value="None of the above" />
+                        d) None of the above
+                    </label><br /><br>
+
+                  
+                    <input type="submit" value="Submit" class="btn btn-success" />
+
+                </form>
+                <div>
+                </div>
+
+            </div>
+            </div>
+        </div>
+    </div>
+<div class="justify-content-center bg-info" style="font-weight:bold">
+
+    @TempData["assess"]
+</div>
